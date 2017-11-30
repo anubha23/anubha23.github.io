@@ -306,6 +306,7 @@ button.contact:focus
 	    
 	     function bindContactForm() {
                 var $contactForm = $('.email-form');
+		     var $cardHome=$('.card');
                 $contactForm.submit(function (e) {
                     e.preventDefault();
                     $.ajax({
@@ -314,15 +315,15 @@ button.contact:focus
                         data: $(this).serialize(),
                         dataType: 'json',
                         beforeSend: function () {
-                            $contactForm.append('<div class="alert alert--loading">Sending message…</div>');
+                            $cardHome.append('<div class="alert alert--loading">Sending message…</div>');
                         },
                         success: function (data) {
-                            $contactForm.find('.alert--loading').hide();
-                            $contactForm.append('<div class="alert alert--success">Message sent successfully!</div>');
+                            $cardHome.find('.alert--loading').hide();
+                            $cardHome.append('<div class="alert alert--success">Message sent successfully!</div>');
                         },
                         error: function (err) {
-                            $contactForm.find('.alert--loading').hide();
-                            $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
+                            $cardHome.find('.alert--loading').hide();
+                            $cardHome.append('<div class="alert alert--error">Ops, there was an error.</div>');
                         }
                     });
                 });
