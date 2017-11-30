@@ -298,9 +298,37 @@ button.contact:focus
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="https://use.fontawesome.com/b4ad495fb9.js"></script>
+	
   <script language="javascript">
     $(document).ready(function()
 {
+	    bindContactForm();
+	    
+	     function bindContactForm() {
+                var $contactForm = $('.email-form');
+                $contactForm.submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '//formspree.io/anubha007@gmail.com',
+                        method: 'POST',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        beforeSend: function () {
+                            $contactForm.append('<div class="alert alert--loading">Sending message…</div>');
+                        },
+                        success: function (data) {
+                            $contactForm.find('.alert--loading').hide();
+                            $contactForm.append('<div class="alert alert--success">Message sent!</div>');
+                        },
+                        error: function (err) {
+                            $contactForm.find('.alert--loading').hide();
+                            $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
+                        }
+                    });
+                });
+            }
+	    
+	    
     $('.contact').click(function (e) 
     {
         $('.card').toggleClass('active');
@@ -356,8 +384,7 @@ button.contact:focus
                 <a href=""><i class="fa fa-instagram"></i></a>
                 <a href=""><i class="fa fa-linkedin"></i></a>
             </div>
-           <form class="email-form" action="https://formspree.io/anubha007@gmail.com"
-      method="POST">
+           <form class="email-form">
                 <input id="name" type="text" placeholder="name" name="name">
                 <input id="email" type="text" placeholder="email" name="_replyto">
                 <textarea id="comment" type="text" placeholder="comment"></textarea>
