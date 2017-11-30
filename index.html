@@ -315,15 +315,15 @@ button.contact:focus
                         data: $(this).serialize(),
                         dataType: 'json',
                         beforeSend: function () {
-                            $cardHome.append('<div class="alert alert--loading">Sending message…</div>');
+                            $cardHome.append('<br/><div class="alert alert--loading">Sending message…</div>');
                         },
                         success: function (data) {
                             $cardHome.find('.alert--loading').hide();
-                            $cardHome.append('<div class="alert alert--success">Message sent successfully!</div>');
+                            $cardHome.append('<br/><div class="alert alert--success">Message sent successfully!</div>');
                         },
                         error: function (err) {
                             $cardHome.find('.alert--loading').hide();
-                            $cardHome.append('<div class="alert alert--error">Ops, there was an error.</div>');
+                            $cardHome.append('<br/><div class="alert alert--error">Ops, there was an error.</div>');
                         }
                     });
                 });
